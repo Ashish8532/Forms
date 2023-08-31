@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-template-form',
@@ -18,6 +19,7 @@ export class TemplateFormComponent {
     {id: '2', value: 'Female'},
     {id: '3', value: 'Other'},
   ]
+  constructor(private router: Router) {}
 
   submit() {
     console.log("Form submited", this.form);

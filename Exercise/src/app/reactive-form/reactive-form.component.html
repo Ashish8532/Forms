@@ -1,0 +1,92 @@
+<div class="mt-5 container">
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div class="bg-light rounded-2 p-3 mt-4 row">
+                    <h2>Register (Reactive Form)</h2>
+                    <hr />
+                    <div formGroupName="personaldetails">
+                        <div class="form-group mb-2">
+                            <label for="firstname">First Name: </label>
+                            <input type="text" id="firstname" class="form-control" formControlName="firstname" />
+                            <div>
+                                <small *ngIf="reactiveForm.get('personaldetails.firstname').errors?.['required'] && reactiveForm.get('personaldetails.firstname').touched">
+                                    First name is required field.
+                                </small>
+                                <small *ngIf="reactiveForm.get('personaldetails.firstname').errors?.['noSpaceAllowed'] && reactiveForm.get('personaldetails.firstname').touched">
+                                    First name cannot contain a space.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="lastname">Last Name: </label>
+                            <input type="text" id="lastname" class="form-control" formControlName="lastname" />
+                            <div>
+                                <small *ngIf="reactiveForm.get('personaldetails.lastname').errors?.['required'] && reactiveForm.get('personaldetails.lastname').touched">
+                                    First name is required field.
+                                </small>
+                                <small *ngIf="reactiveForm.get('personaldetails.lastname').errors?.['noSpaceAllowed'] && reactiveForm.get('personaldetails.lastname').touched">
+                                    First name cannot contain a space.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="email">Email: </label>
+                            <input type="email" id="email" class="form-control" formControlName="email" />
+                            <div>
+                                <small
+                                    *ngIf="!reactiveForm.get('personaldetails.email').valid && reactiveForm.get('personaldetails.email').touched">The
+                                    email you entered is not a valid
+                                    email.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="password">Password: </label>
+                            <input type="password" id="password" class="form-control" formControlName="password" />
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="phonenumber">Phone Number: </label>
+                            <input type="tel" id="phonenumber" class="form-control" formControlName="phonenumber" />
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group mb-2">
+                        <label for="country">Country: </label>
+                        <select class="form-select" id="country" formControlName="country">
+                            <option value="india">India</option>
+                            <option value="dubai">Dubai</option>
+                            <option value="nepal">Nepal</option>
+                            <option value="america">America</option>
+                            <option value="australia">Australia</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label class="me-sm-2" for="gender">Gender: </label>
+                        <input class="form-check-input me-sm-1" type="radio" id="male" value="male"
+                            formControlName="gender">
+                        <label class="form-check-label  me-sm-2" for="male">Male</label>
+                        <input class="form-check-input me-sm-1" type="radio" id="female" value="female"
+                            formControlName="gender">
+                        <label class="form-check-label  me-sm-2" for="female">Female</label>
+                        <input class="form-check-input me-sm-1" type="radio" id="other" value="other"
+                            formControlName="gender">
+                        <label class="form-check-label  me-sm-2" for="other">Other</label>
+                    </div>
+
+                    <div class="form-group mb-3" formArrayName="skills">
+                        <label class="me-sm-2" for="skill">Skills: </label>
+                        <ng-container *ngFor="let skill of reactiveForm.get('skills')['controls']; index as i">
+                            <input class="form-control mb-1" type="text" id="skill"  placeholder="Add skills..." formControlName="{{i}}">
+                        </ng-container>
+                        <button class="me-sm-1 btn btn-secondary" (click)="addSkills()">+Add Skills</button>
+                    </div>
+                    <button type="submit" class="me-sm-1 btn btn-success">Register</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
